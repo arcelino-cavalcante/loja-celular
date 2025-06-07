@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUA Store - Produtos Apple</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f7;
+            scroll-behavior: smooth;
+        }
+
+        /* Animações e Transições */
+        .transition-all-300 {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .transition-all-500 {
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* Animação do Carrinho */
+        #cart-sidebar {
+            transform: translateX(100%);
+        }
+
+        #cart-sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Overlay do Carrinho */
+        #cart-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease;
+        }
+
+        #cart-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Barra de Rolagem Customizada */
+        .cart-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .cart-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .cart-scrollbar::-webkit-scrollbar-thumb {
+            background: #cccccc;
+            border-radius: 4px;
+        }
+
+        .cart-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Efeito de Animação ao Rolar a Página */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 1.34a7.19 7.19 0 0 0-6.12 3.53c-2.48 4.49-1.37 9.8.76 12.37a5.22 5.22 0 0 0 3.72 1.89c.75 0 1.25-.52 1.25-1.2v-2.3c0-.88-.42-1.32-1.09-1.32-.42 0-.85.2-1.28.53-.29.21-.63.26-.92.08-.6-.35-1.1-1-1.35-1.8-.18-.54-.28-1.12-.28-1.78a5.17 5.17 0 0 1 2.34-4.51c.18-.13.38-.2.58-.2a.93.93 0 0 1 .91.94v5.3c0 .58.42.94.94.94s.94-.36.94-.94V6.63c0-2.31-1.7-3.6-3.72-3.6-1.1 0-2.14.66-2.81 1.58A6.81 6.81 0 0 1 12 1.34z" />
+                </svg>
+                <span class="font-bold text-xl">SUA Store</span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#iphone" class="hover:text-blue-600 transition-colors">iPhone</a>
+                <a href="#mac" class="hover:text-blue-600 transition-colors">Mac</a>
+                <a href="#ipad" class="hover:text-blue-600 transition-colors">iPad</a>
+                <a href="#watch" class="hover:text-blue-600 transition-colors">Watch</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        <!-- Hero Section -->
+        <section class="text-center mb-20 scroll-animate">
+            <p class="text-blue-600 font-semibold mb-2">Novo</p>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">iPhone 15 Pro</h1>
+            <h2 class="text-2xl md:text-3xl text-gray-600 mb-6">Titânio. Tão robusto. Tão leve. Tão Pro.</h2>
+            <a href="#iphone"
+                class="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-all-300">Ver
+                modelos</a>
+        </section>
+
+        <!-- iPhone Section -->
+        <section id="iphone" class="py-10">
+            <h3 class="text-3xl font-bold mb-12 text-center scroll-animate">iPhone. <span
+                    class="text-gray-500">Poderosamente simples.</span></h3>
+            <div id="iphone-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </section>
+
+        <!-- Mac Section -->
+        <section id="mac" class="py-10">
+            <h3 class="text-3xl font-bold mb-12 text-center scroll-animate">Mac. <span class="text-gray-500">Para ir
+                    mais longe.</span></h3>
+            <div id="mac-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </section>
+
+        <!-- iPad Section -->
+        <section id="ipad" class="py-10">
+            <h3 class="text-3xl font-bold mb-12 text-center scroll-animate">iPad. <span class="text-gray-500">Desenhe,
+                    aprenda, trabalhe, jogue.</span></h3>
+            <div id="ipad-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </section>
+
+        <!-- Watch Section -->
+        <section id="watch" class="py-10">
+            <h3 class="text-3xl font-bold mb-12 text-center scroll-animate">Watch. <span
+                    class="text-gray-500">Inteligente. Brilhante. Poderoso.</span></h3>
+            <div id="watch-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        </section>
+    </main>
+
+    <!-- Floating Cart Icon -->
+    <div id="cart-icon-container" class="fixed bottom-6 right-6 z-50">
+        <button onclick="window.app.toggleCart()"
+            class="bg-black text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+            </svg>
+            <span id="cart-count-badge"
+                class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center hidden">0</span>
+        </button>
+    </div>
+
+    <!-- Cart Overlay & Sidebar -->
+    <div id="cart-overlay" onclick="window.app.toggleCart()" class="fixed inset-0 bg-black/40 z-40"></div>
+    <div id="cart-sidebar"
+        class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transition-all-500 flex flex-col">
+        <div class="flex justify-between items-center p-6 border-b">
+            <h4 class="text-2xl font-bold">Meu Carrinho</h4>
+            <button onclick="window.app.toggleCart()" class="text-gray-500 hover:text-gray-800 transition-all-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div id="cart-items-container" class="flex-grow p-6 overflow-y-auto cart-scrollbar"></div>
+        <div class="p-6 border-t bg-gray-50">
+            <div class="flex justify-between items-center mb-4 font-bold text-lg">
+                <span>Total:</span>
+                <span id="cart-total">R$ 0,00</span>
+            </div>
+            <button onclick="window.app.sendOrderToWhatsApp()" id="whatsapp-button"
+                class="w-full bg-green-500 text-white py-3 rounded-lg font-bold text-lg hover:bg-green-600 transition-all-300 flex items-center justify-center space-x-2 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.902-.539-5.59-1.55L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.447-4.433-9.886-9.888-9.886-5.448 0-9.886 4.434-9.889 9.885-.002 2.02.604 3.933 1.66 5.661l-1.35 4.939 4.994-1.328z" />
+                </svg>
+                <span>Enviar Pedido</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification"
+        class="fixed top-5 right-5 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg opacity-0 -translate-y-full transition-all duration-500">
+        Produto adicionado ao carrinho!
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <p>&copy; 2024 SUA Store Inc. Todos os direitos reservados.</p>
+            <p class="text-sm mt-2">Este é um site de demonstração. Os produtos e preços são fictícios.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===================================================================================
+        // CONFIGURAÇÃO DA LOJA
+        // ===================================================================================
+        const WHATSAPP_PHONE_NUMBER = '5511912345678';
+        const products = [
+            // iPhones
+            { id: 1, name: 'iPhone 15 Pro', description: 'Tela 6,1", Chip A17 Pro.', price: 9299.00, imageSrc: 'https://placehold.co/600x600/111111/FFFFFF?text=iPhone+15+Pro', category: 'iphone' },
+            { id: 2, name: 'iPhone 15', description: 'Tela 6,1", Chip A16 Bionic.', price: 7299.00, imageSrc: 'https://placehold.co/600x600/E0E0E0/000000?text=iPhone+15', category: 'iphone' },
+            { id: 3, name: 'iPhone 14 Plus', description: 'Tela 6,7", Chip A15 Bionic.', price: 6499.00, imageSrc: 'https://placehold.co/600x600/A0A0FF/FFFFFF?text=iPhone+14', category: 'iphone' },
+            { id: 4, name: 'iPhone SE', description: 'Tela 4,7", Chip A15 Bionic.', price: 4299.00, imageSrc: 'https://placehold.co/600x600/F0A0A0/FFFFFF?text=iPhone+SE', category: 'iphone' },
+            // Macs
+            { id: 5, name: 'MacBook Air 13"', description: 'Chip M2, Leve e veloz.', price: 10999.00, imageSrc: 'https://placehold.co/600x600/c2c2c2/000000?text=MacBook+Air', category: 'mac' },
+            { id: 6, name: 'MacBook Pro 14"', description: 'Chip M3 Pro, Potência Pro.', price: 18499.00, imageSrc: 'https://placehold.co/600x600/555555/FFFFFF?text=MacBook+Pro', category: 'mac' },
+            { id: 7, name: 'iMac', description: 'Tela 24", Chip M3.', price: 14499.00, imageSrc: 'https://placehold.co/600x600/7ec4ff/000000?text=iMac', category: 'mac' },
+            { id: 8, name: 'Mac mini', description: 'Chip M2, Gigante no poder.', price: 7499.00, imageSrc: 'https://placehold.co/600x600/e3e3e3/000000?text=Mac+mini', category: 'mac' },
+            // iPads
+            { id: 9, name: 'iPad Pro', description: 'Tela 11", Chip M2.', price: 9799.00, imageSrc: 'https://placehold.co/600x600/4d4d4d/FFFFFF?text=iPad+Pro', category: 'ipad' },
+            { id: 10, name: 'iPad Air', description: 'Tela 10,9", Chip M1.', price: 6999.00, imageSrc: 'https://placehold.co/600x600/c1e1ff/000000?text=iPad+Air', category: 'ipad' },
+            { id: 11, name: 'iPad (10ª ger.)', description: 'Tela 10,9", Chip A14.', price: 4999.00, imageSrc: 'https://placehold.co/600x600/ffd4e5/000000?text=iPad', category: 'ipad' },
+            { id: 12, name: 'iPad mini', description: 'Tela 8,3", Chip A15.', price: 5999.00, imageSrc: 'https://placehold.co/600x600/e0d6ff/000000?text=iPad+mini', category: 'ipad' },
+            // Watches
+            { id: 13, name: 'Apple Watch Series 9', description: 'GPS, Caixa 45mm.', price: 4999.00, imageSrc: 'https://placehold.co/600x600/ffb3b3/000000?text=Watch+S9', category: 'watch' },
+            { id: 14, name: 'Apple Watch Ultra 2', description: 'GPS + Cellular, Titânio.', price: 9699.00, imageSrc: 'https://placehold.co/600x600/ffc977/000000?text=Watch+Ultra+2', category: 'watch' },
+            { id: 15, name: 'Apple Watch SE', description: 'GPS, Caixa 44mm.', price: 3299.00, imageSrc: 'https://placehold.co/600x600/d9d9d9/000000?text=Watch+SE', category: 'watch' },
+        ];
+
+        // ===================================================================================
+        // LÓGICA DA APLICAÇÃO
+        // ===================================================================================
+
+        let cartItems = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const domElements = {
+                cartSidebar: document.getElementById('cart-sidebar'),
+                cartOverlay: document.getElementById('cart-overlay'),
+                cartCountBadge: document.getElementById('cart-count-badge'),
+                cartItemsContainer: document.getElementById('cart-items-container'),
+                cartTotalEl: document.getElementById('cart-total'),
+                whatsappButton: document.getElementById('whatsapp-button'),
+                notificationEl: document.getElementById('notification'),
+                productGrids: {
+                    iphone: document.getElementById('iphone-grid'),
+                    mac: document.getElementById('mac-grid'),
+                    ipad: document.getElementById('ipad-grid'),
+                    watch: document.getElementById('watch-grid'),
+                }
+            };
+
+            const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+
+            function renderAllProducts() {
+                Object.values(domElements.productGrids).forEach(grid => grid.innerHTML = '');
+
+                products.forEach(product => {
+                    const grid = domElements.productGrids[product.category];
+                    if (grid) {
+                        const productCard = `
+                            <div class="bg-white rounded-2xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-xl hover:scale-[1.03] transition-all-300 scroll-animate">
+                                <img src="${product.imageSrc}" alt="${product.name}" class="w-48 h-48 object-cover mb-4 rounded-lg">
+                                <h4 class="text-xl font-bold mb-1">${product.name}</h4>
+                                <p class="text-gray-500 mb-4 h-10">${product.description}</p>
+                                <p class="text-2xl font-bold mb-4">${formatCurrency(product.price)}</p>
+                                <button onclick="window.app.addToCart(${product.id})" class="bg-blue-600 text-white px-8 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors w-full">
+                                    Adicionar
+                                </button>
+                            </div>
+                        `;
+                        grid.innerHTML += productCard;
+                    }
+                });
+                setupScrollAnimation();
+            }
+
+            function showNotification() {
+                domElements.notificationEl.classList.remove('opacity-0', '-translate-y-full');
+                setTimeout(() => {
+                    domElements.notificationEl.classList.add('opacity-0', '-translate-y-full');
+                }, 2500);
+            }
+
+            function updateCart() {
+                renderCartItems();
+                updateCartTotal();
+                updateCartBadge();
+            }
+
+            function renderCartItems() {
+                const container = domElements.cartItemsContainer;
+                if (cartItems.length === 0) {
+                    container.innerHTML = `<p class="text-gray-500 text-center mt-8">Seu carrinho está vazio.</p>`;
+                    return;
+                }
+                container.innerHTML = cartItems.map(item => `
+                    <div class="flex items-center justify-between py-4 border-b last:border-b-0">
+                        <div class="flex items-center">
+                            <img src="${item.imageSrc}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            <div>
+                                <p class="font-bold">${item.name}</p>
+                                <p class="text-sm text-gray-600">${formatCurrency(item.price)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <button onclick="window.app.updateQuantity(${item.id}, -1)" class="w-7 h-7 rounded-full border flex items-center justify-center hover:bg-gray-100 transition-all-300">-</button>
+                            <span class="font-medium">${item.quantity}</span>
+                            <button onclick="window.app.updateQuantity(${item.id}, 1)" class="w-7 h-7 rounded-full border flex items-center justify-center hover:bg-gray-100 transition-all-300">+</button>
+                            <button onclick="window.app.removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 transition-all-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function updateCartTotal() {
+                const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                domElements.cartTotalEl.textContent = formatCurrency(total);
+                domElements.whatsappButton.disabled = cartItems.length === 0;
+            }
+
+            function updateCartBadge() {
+                const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+                const badge = domElements.cartCountBadge;
+                if (totalItems > 0) {
+                    badge.textContent = totalItems;
+                    badge.classList.remove('hidden');
+                } else {
+                    badge.classList.add('hidden');
+                }
+            }
+
+            function setupScrollAnimation() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                document.querySelectorAll('.scroll-animate').forEach(el => observer.observe(el));
+            }
+
+            window.app = {
+                toggleCart: () => {
+                    domElements.cartSidebar.classList.toggle('open');
+                    domElements.cartOverlay.classList.toggle('open');
+                },
+                addToCart: (productId) => {
+                    const product = products.find(p => p.id === productId);
+                    const existingItem = cartItems.find(item => item.id === productId);
+                    if (existingItem) {
+                        existingItem.quantity++;
+                    } else {
+                        cartItems.push({ ...product, quantity: 1 });
+                    }
+                    showNotification();
+                    updateCart();
+                },
+                updateQuantity: (productId, change) => {
+                    const item = cartItems.find(i => i.id === productId);
+                    if (!item) return;
+                    item.quantity += change;
+                    if (item.quantity <= 0) window.app.removeFromCart(productId);
+                    else updateCart();
+                },
+                removeFromCart: (productId) => {
+                    cartItems = cartItems.filter(item => item.id !== productId);
+                    updateCart();
+                },
+                sendOrderToWhatsApp: () => {
+                    if (cartItems.length === 0) return;
+                    const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    let message = "Olá! Gostaria de fazer o seguinte pedido na SUA Store:\n\n";
+                    cartItems.forEach(item => {
+                        message += `*${item.quantity}x* - ${item.name}\n`;
+                    });
+                    message += `\n*Total do Pedido: ${formatCurrency(total)}*`;
+                    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            };
+
+            renderAllProducts();
+            updateCart();
+        });
+    </script>
+</body>
+
+</html>
